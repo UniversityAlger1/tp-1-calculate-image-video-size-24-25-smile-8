@@ -4,24 +4,26 @@
 // Parameters:
 //   w: width of the image
 //   h: height of the image
-//   unit: Unit of the output value. It could be 'bt' (bits), 'ko' (kilobytes), 'mo' (megabytes), 'go' (gigabytes)
-// Return value
-//   Grayscale image size Bitmap (based on the unit passed parameter)
+//   unit: Unit of the output value. It could be:
+//         'bt' for bits, 'ko' for kilobits, 'mo' for megabits, 'go' for gigabits
+// Return value:
+//   colored image size Bitmap (based on the unit passed as a parameter)
 float coloredBitmap(int w, int h, char* unit) {
-    // Calculate the total size in bytes (grayscale: 1 byte per pixel)
-    int sizeInBytes = w * h;
+   // Calculate size in bits (1 pixel = 3 bytes = 24 bits)
+   float sizeInBits = (float)(w * h * 24);
 
-    // Convert the size based on the specified unit
-    if (strcmp(unit, "bt") == 0) {
-        return sizeInBytes * 8; // Convert bytes to bits
-    } else if (strcmp(unit, "ko") == 0) {
-        return sizeInBytes / 1024.0; // Convert bytes to kilobytes
-    } else if (strcmp(unit, "mo") == 0) {
-        return sizeInBytes / (1024.0 * 1024.0); // Convert bytes to megabytes
-    } else if (strcmp(unit, "go") == 0) {
-        return sizeInBytes / (1024.0 * 1024.0 * 1024.0); // Convert bytes to gigabytes
-    }
+   // Convert size to the desired unit
+   if (strcmp(unit, "bt") == 0) {
+       return sizeInBits; // Return size in bits
+   } else if (strcmp(unit, "ko") == 0) {
+       return sizeInBits / 1024.0; // Convert to kilobits
+   } else if (strcmp(unit, "mo") == 0) {
+       return sizeInBits / (1024.0 * 1024.0); // Convert to megabits
+   } else if (strcmp(unit, "go") == 0) {
+       return sizeInBits / (1024.0 * 1024.0 * 1024.0); // Convert to gigabits
+   }
 
-    // Default return value (if the unit is invalid)
-    return 0;
+   // Default: return 0 if the unit is invalid
+   return 0.0;
 }
+
