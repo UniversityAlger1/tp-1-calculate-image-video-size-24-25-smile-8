@@ -16,7 +16,8 @@ float video(int w, int h, int durationMovie, int durationCredits, int fps, char*
     const float BYTE_TO_MB = 8*1024.0 * 1024.0;
     const float BYTE_TO_GB = 8*1024.0 * 1024.0 * 1024.0;
     // Calculate size of the colored section (RGB: 3 bytes per pixel)
-    float colorSectionSize = (float)w * h 8 3* fps * durationMovie;
+    float colorSectionSize = (float)w * h * 3 * fps * durationMovie * 8;
+
     // Calculate size of the black-and-white section (1 byte per pixel)
     float bwSectionSize = (float)w * h * 1 * fps * durationCredits;
     // Total size in bytes
